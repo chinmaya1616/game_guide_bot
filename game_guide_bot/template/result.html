@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Guide Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #333;
+            color: white;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 36px;
+            text-align: center;
+        }
+        img {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        .description {
+            font-size: 18px;
+            text-align: justify;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .reddit-posts {
+            margin-top: 30px;
+        }
+        .reddit-posts ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .reddit-posts li {
+            margin: 10px 0;
+        }
+        .reddit-posts a {
+            color: #ff6a00;
+            text-decoration: none;
+        }
+        a {
+            color: #ff6a00;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if error %}
+            <h1>Error</h1>
+            <p>{{ error }}</p>
+        {% else %}
+            <h1>{{ info.title }}</h1>
+            {% if info.image %}
+                <img src="{{ info.image }}" alt="{{ info.title }}">
+            {% endif %}
+            <div class="description">
+                <p>{{ info.description }}</p>
+            </div>
+
+            {% if info.reddit_posts %}
+                <div class="reddit-posts">
+                    <h2>Top Reddit Discussions</h2>
+                    <ul>
+                        {% for post in info.reddit_posts %}
+                            <li><a href="{{ post.url }}" target="_blank">{{ post.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <br>
+            <a href="/">Search Another Game</a>
+        {% endif %}
+    </div>
+</body>
+</html>
